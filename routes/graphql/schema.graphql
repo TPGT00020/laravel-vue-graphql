@@ -1,0 +1,43 @@
+type Query {
+    me: User! @auth
+    products: [Product!]! @all
+}
+
+type Mutation {
+    addProductToShoppingCart(productId: ID!): ShoppingCartPayload!
+    deleteProductFromShoppingCart(productId: ID!): ShoppingCartPayload!
+}
+
+type ShoppingCartPayload {
+    shoppingCart: ShoppingCart!
+}
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    shoppingCart: ShoppingCart @hasOne
+}
+
+type ShoppingCart {
+    id: ID!
+    total: Float!
+    totalBeforeSavings: Float!
+    savings: Float!
+    products: [ShoppingCartProduct!]! @belongsToMany
+}
+
+type ShoppingCartProduct {
+    id: ID!
+    name: String!
+    price: Float!
+    savings: Float!
+    quantity: Int!
+}
+
+type Product {
+    id: ID!
+    name: String!
+    price: Float!
+    savings: Float!
+}
