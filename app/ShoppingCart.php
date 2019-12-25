@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShoppingCart extends Model
 {
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function products()
     {
         return $this->belongsToMany(Product::class)->withPivot('quantity');
@@ -38,6 +43,6 @@ class ShoppingCart extends Model
             $this->products()->attach($product);
         }
 
-        return $this->fresh();
+        return $this->fresh()->user;
     }
 }

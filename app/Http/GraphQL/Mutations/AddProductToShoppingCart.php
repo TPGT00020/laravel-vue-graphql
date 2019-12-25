@@ -10,6 +10,11 @@ class AddProductToShoppingCart
 {
     public function resolve($rootValue, array $args, GraphQLContext $context)
     {
-        return ['shoppingCart' => $context->user()->shoppingCart->addProduct(Product::findOrFail($args['productId']))];
+        if ($context->user()->shoppingCart == null){
+            $shoppingCart = $context->user()->shoppingCart()->create();
+        }else{
+            $shoppingCart = $context->user()->shoppingCart;
+        }
+        return ['user' => $shoppingCart->addProduct(Product::findOrFail($args['productId']))];
     }
 }

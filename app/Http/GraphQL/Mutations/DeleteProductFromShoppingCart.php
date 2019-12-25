@@ -9,10 +9,12 @@ class DeleteProductFromShoppingCart
 {
     public function resolve($rootValue, array $args, GraphQLContext $context)
     {
+        $shoppingCart = tap($context->user()->shoppingCart, function ($shoppingCart) use ($args) {
+            $shoppingCart->products()->detach($args['productId']);
+        });
+
         return [
-            'shoppingCart' => tap($context->user()->shoppingCart, function ($shoppingCart) use ($args) {
-                $shoppingCart->products()->detach($args['productId']);
-            })
+            'user' => $shoppingCart->user
         ];
     }
 }

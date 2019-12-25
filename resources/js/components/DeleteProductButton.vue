@@ -6,28 +6,24 @@
 
 <script>
     import gql from 'graphql-tag';
-    import ShoppingCartTotals from './ShoppingCartTotals';
-    import {fragment} from './ShoppingCartProductsList';
 
     export default {
 
         // Use beforeCreate and require to avoid a circular dependency issue with importing a grandparent component
         beforeCreate() {
-            const ShoppingCartProductsListFragment = require('./ShoppingCartProductsList.vue').fragment;
+            const ShoppingCartFragment = require('./ShoppingCart.vue').fragment;
 
             this.$options.mutation = gql`
                 mutation deleteProductButton($productId: ID!) {
                     deleteProductFromShoppingCart(productId: $productId) {
-                        shoppingCart {
+                        user {
                             id
-                            ...ShoppingCartProductsList
-                            ...ShoppingCartTotals
+                            ...ShoppingCart
                         }
                     }
                 }
 
-                ${ShoppingCartProductsListFragment}
-                ${ShoppingCartTotals.fragment}
+                ${ShoppingCartFragment}
             `;
         },
 

@@ -10,8 +10,7 @@
 
 <script>
     import gql from 'graphql-tag';
-    import ShoppingCartTotals from './ShoppingCartTotals';
-    import ShoppingCartProductsList from './ShoppingCartProductsList';
+    import ShoppingCart from './ShoppingCart';
 
     export default {
         props: {
@@ -33,16 +32,14 @@
         mutation: gql`
             mutation productButton($productId: ID!) {
                 addProductToShoppingCart(productId: $productId) {
-                    shoppingCart {
+                    user {
                         id
-                        ...ShoppingCartProductsList
-                        ...ShoppingCartTotals
+                        ...ShoppingCart
                     }
                 }
             }
 
-            ${ShoppingCartProductsList.fragment}
-            ${ShoppingCartTotals.fragment}
+            ${ShoppingCart.fragment}
         `,
     }
 </script>

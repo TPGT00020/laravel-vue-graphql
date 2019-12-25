@@ -30,3 +30,6 @@
 
 - [Add ChomeiQL to browser](https://chrome.google.com/webstore/detail/chromeiql/fkkiamalmpiidkljmicmjfbieiclmeij).
 - Set endpoint: **http://localhost:8000/graphql**
+
+![demo](public/img/graphQL.png)
+

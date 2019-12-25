@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="shoppingCart">
         <h2 class="text-center">Shopping Cart</h2>
         <ShoppingCartProductsList v-bind="filter($options.components.ShoppingCartProductsList.fragment, shoppingCart)" />
         <ShoppingCartTotals v-bind="filter($options.components.ShoppingCartTotals.fragment, shoppingCart)" />
